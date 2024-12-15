@@ -5,6 +5,7 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import java.security.SecureRandom;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -123,7 +124,7 @@ public class QRCodeUtil {
 		BufferedImage image = QRCodeUtil.createImage(content, imgPath,
 			needCompress);
 		mkdirs(destPath);
-		String file = new Random().nextInt(99999999)+".jpg";
+		String file = new SecureRandom().nextInt(99999999)+".jpg";
 		ImageIO.write(image, FORMAT_NAME, new File(destPath+"/"+file));
 		return file;
 	}
