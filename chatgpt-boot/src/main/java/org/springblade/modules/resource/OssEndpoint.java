@@ -15,6 +15,7 @@
  */
 package org.springblade.modules.resource;
 
+import io.github.pixee.security.Filenames;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
@@ -128,7 +129,7 @@ public class OssEndpoint {
 	@SneakyThrows
 	@PostMapping("/put-file")
 	public R<BladeFile> putFile(@RequestParam MultipartFile file) {
-		BladeFile bladeFile = qiniuTemplate.putFile(file.getOriginalFilename(), file.getInputStream());
+		BladeFile bladeFile = qiniuTemplate.putFile(Filenames.toSimpleFileName(file.getOriginalFilename()), file.getInputStream());
 		return R.data(bladeFile);
 	}
 
