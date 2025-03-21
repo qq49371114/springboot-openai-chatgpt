@@ -1,5 +1,6 @@
 package org.springblade.modules.mjkj.utils.imagecode;
 
+import java.security.SecureRandom;
 import org.mybatis.logging.Logger;
 import org.mybatis.logging.LoggerFactory;
 
@@ -46,7 +47,7 @@ public class SlidePuzzleUtil {
 			BufferedImage bigImage = resizeImage(originalImage, bigWidth, bigHeight, true);
 
 			// 2.随机生成离左上角的(X,Y)坐标，上限为 [bigWidth-smallWidth, bigHeight-smallHeight]。最好离大图左边远一点，上限不要紧挨着大图边界
-			Random random = new Random();
+			Random random = new SecureRandom();
 			int randomX = random.nextInt(bigWidth - 4 * smallWidth - smallCircle) + 2 * smallWidth; // X范围：[2*smallWidth, bigWidth - 2*smallWidth - smallCircle)
 			int randomY = random.nextInt(bigHeight - smallHeight - 2 * smallCircle) + smallCircle; // Y范围：[smallCircle, bigHeight - smallHeight - smallCircle)
 			//logger.info("原图大小：{} x {}，大图大小：{} x {}，随机生成的坐标：(X,Y)=({},{})", originalImage.getWidth(), originalImage.getHeight(), bigImage.getWidth(), bigImage.getHeight(),
