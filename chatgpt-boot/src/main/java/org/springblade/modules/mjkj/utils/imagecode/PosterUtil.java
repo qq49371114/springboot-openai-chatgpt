@@ -1,6 +1,8 @@
 package org.springblade.modules.mjkj.utils.imagecode;
 
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.springblade.modules.mjkj.model.Poster;
 import sun.font.FontDesignMetrics;
 
@@ -112,9 +114,9 @@ public class PosterUtil {
 		String goodsUrl = poster.getGoodsUrl();//顶部图片地址
 		String avatarUrl = poster.getAvatarUrl();//头像图片地址
 		String blankUrl = poster.getBlankUrl();//头像图片地址
-		BufferedImage qrCodeImage = ImageIO.read(new URL(qrCodeUrl));
-		BufferedImage goodsImage = ImageIO.read(new URL(goodsUrl));
-		BufferedImage blankImage = ImageIO.read(new URL(blankUrl));
+		BufferedImage qrCodeImage = ImageIO.read(Urls.create(qrCodeUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
+		BufferedImage goodsImage = ImageIO.read(Urls.create(goodsUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
+		BufferedImage blankImage = ImageIO.read(Urls.create(blankUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
 		int width = poster.getWidth();
 		int height = poster.getHeight();
 		//画布
@@ -217,7 +219,7 @@ public class PosterUtil {
 
 
 	private static BufferedImage circle(String avatar_img,int width) throws Exception {
-		BufferedImage avatar = ImageIO.read(new URL(avatar_img));
+		BufferedImage avatar = ImageIO.read(Urls.create(avatar_img, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
 		BufferedImage newAvatar = new BufferedImage(width, width, BufferedImage.TYPE_INT_ARGB);
 		Ellipse2D.Double shape = new Ellipse2D.Double(0, 0, width, width);
 		Graphics2D g2 = newAvatar.createGraphics();
