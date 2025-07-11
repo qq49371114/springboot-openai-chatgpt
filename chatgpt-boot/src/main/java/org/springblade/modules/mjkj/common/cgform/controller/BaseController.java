@@ -19,6 +19,7 @@ package org.springblade.modules.mjkj.common.cgform.controller;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import io.github.pixee.security.Newlines;
 import lombok.extern.slf4j.Slf4j;
 import org.springblade.core.boot.ctrl.BladeController;
 import org.springblade.core.tool.utils.Func;
@@ -116,10 +117,10 @@ public class BaseController extends BladeController {
 			String browse = BrowserUtils.checkBrowse(request);
 			String suffix = fileUrl.substring(fileUrl.lastIndexOf("."));
 			if ("MSIE".equalsIgnoreCase(browse.substring(0, 4))) {
-				response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode(name, "UTF-8") );
+				response.setHeader("content-disposition", Newlines.stripAll("attachment;filename=" + URLEncoder.encode(name, "UTF-8")) );
 			} else {
 				String filename = new String(name.getBytes("UTF-8"), "ISO8859-1");
-				response.setHeader("content-disposition", "attachment;filename=" + filename );
+				response.setHeader("content-disposition", Newlines.stripAll("attachment;filename=" + filename) );
 			}
 			out = response.getOutputStream();
 			out.write(buffer);
